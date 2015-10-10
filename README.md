@@ -1,4 +1,2 @@
-eventos
+Presupuesto Departamentos
 =======
-
-Una aplicacion que muestra eventos en un mapa usando OSM.
