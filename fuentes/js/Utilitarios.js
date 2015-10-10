@@ -3,7 +3,7 @@ var v_accion = null;
 
 /*
  * Funcion que se obtiene la fecha actual.
- * 
+ *
  */
 function obtenerFechaActual(p_modo_fecha){
 	// Obtener fecha actual.
@@ -36,7 +36,7 @@ function obtenerFechaActual(p_modo_fecha){
  */
 function localizame(p_accion){
 	v_accion = p_accion;
-	
+
 	/**
 	 * OBS:
 	 * - Iceweasel 27.0.1 en Debian Wheezy NO funciona la GeoLocalizacion del html5.
@@ -44,8 +44,8 @@ function localizame(p_accion){
 	 */
 	if(navigator.geolocation){
    	 	navigator.geolocation.getCurrentPosition(obtenerCoordenadas, errores, {
-   	 		enableHighAccuracy: true, 
-   	 		maximumAge: 30000, 
+   	 		enableHighAccuracy: true,
+   	 		maximumAge: 30000,
    	 		timeout: 27000
    	 	});
     }else{
@@ -67,7 +67,7 @@ function obtenerCoordenadas(p_position){
 	var v_coordenadas = new Array();
 	v_coordenadas['latitud'] = p_position.coords.latitude;
 	v_coordenadas['longitud']  = p_position.coords.longitude;
-	
+
 	iniciar_mapa(v_coordenadas);
 }
 
@@ -95,23 +95,23 @@ function errores(error){
     }
     */
 	posicionPorDefecto();
-}	
+}
 
 /**
  * @method posicionPorDefecto
  * Metodo que posiciona por defecto Asuncion - Paraguay.
  * @returns void
- */ 
+ */
 function posicionPorDefecto(){
 	//Asuncion - Paraguay.
 	var v_latitud = -25.2961407;
 	var v_longitud = -57.6309129;
-	
+
 	// Se crea un array con latitud y longitud.
 	var v_coordenadas = new Array();
 	v_coordenadas['latitud'] = v_latitud;
 	v_coordenadas['longitud']  = v_longitud;
-	
+
 	iniciar_mapa(v_coordenadas);
 }
 
@@ -120,13 +120,13 @@ function iniciar_mapa(p_coordenadas){
 	switch(v_accion){
 	    case 'listar':
 	    	// Crear Mapa.
-	    	v_mapa = new Mapa('', p_coordenadas, 10);
-	    	
+	    	v_mapa = new Mapa('', p_coordenadas, 5);
+
 	        v_mapa.obtener_eventos();
 	    	break;
 	    case 'marcar':
 	    	// Crear Mapa.
-	    	v_mapa = new Mapa('', p_coordenadas, 10);
+	    	v_mapa = new Mapa('', p_coordenadas, 5);
 	    	break;
 	}
 }
@@ -146,7 +146,7 @@ function direccion_buscador() {
         $.each(p_data, function(key, val) {
             bb = val.boundingbox;
             console.log('val: ', val);
-            
+
             v_array_items.push("<li><a href='#' onclick='elegirDireccion(" + bb[0] + ", " + bb[2] + ", " + bb[1] + ", " + bb[3] + ", \"" + val.osm_type + "\");return false;'>" + val.display_name + '</a></li>');
         });
 
